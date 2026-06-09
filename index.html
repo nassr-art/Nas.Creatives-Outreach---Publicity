@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wind Divin Outreach Tracker</title>
+  <title>Nas.Creatives Publicity Tracker</title>
 
   <!-- Pico.css (classless base) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
@@ -15,7 +15,7 @@
        PREMIUM UI LAYER  (sits on top of Pico.css)
        ============================================================ */
     :root {
-      --brand: #6d28d9;          /* deep violet */
+      --brand: #6d28d9;
       --brand-soft: #ede9fe;
       --ink: #1e1b2e;
       --muted: #6b7280;
@@ -25,223 +25,190 @@
       --radius: 16px;
       --shadow: 0 1px 2px rgba(17,12,46,.04), 0 8px 24px rgba(17,12,46,.06);
       --shadow-lg: 0 4px 12px rgba(17,12,46,.08), 0 16px 48px rgba(17,12,46,.10);
-      /* status colors */
       --st-red: #ef4444;     --st-red-bg: #fee2e2;
       --st-yellow: #d97706;  --st-yellow-bg: #fef3c7;
       --st-blue: #2563eb;    --st-blue-bg: #dbeafe;
       --st-green: #16a34a;   --st-green-bg: #dcfce7;
     }
+    body { background: var(--bg); color: var(--ink); font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main.container { max-width: 1220px; padding-block: 1.5rem; }
 
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    }
-    main.container { max-width: 1180px; padding-block: 1.5rem; }
-
-    /* ---------- Header ---------- */
+    /* Header */
     .app-header {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; flex-wrap: wrap;
-      background: linear-gradient(135deg, var(--brand) 0%, #9333ea 100%);
-      color: #fff;
-      padding: 1.5rem 1.75rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      margin-bottom: 1.5rem;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+      background: linear-gradient(135deg, var(--brand) 0%, #9333ea 100%); color:#fff;
+      padding:1.5rem 1.75rem; border-radius:var(--radius); box-shadow:var(--shadow-lg); margin-bottom:1.5rem;
     }
-    .app-header h1 { margin: 0; font-size: 1.6rem; line-height: 1.2; color:#fff; }
-    .app-header .sub { margin: .25rem 0 0; font-size: .85rem; opacity: .85; }
-    .header-actions { display:flex; align-items:center; gap:.75rem; }
-    .updated { font-size: .8rem; opacity: .9; white-space: nowrap; }
-    .btn-refresh {
-      background: rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.35);
-      padding: .5rem .9rem; border-radius: 10px; font-size: .85rem; font-weight: 600;
-      cursor: pointer; transition: background .15s ease; width:auto; margin:0;
+    .app-header h1 { margin:0; font-size:1.55rem; line-height:1.2; color:#fff; }
+    .app-header .sub { margin:.25rem 0 0; font-size:.85rem; opacity:.85; }
+    .header-actions { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+    .whoami { font-size:.8rem; opacity:.95; background:rgba(255,255,255,.15); padding:.35rem .7rem; border-radius:999px; }
+    .updated { font-size:.8rem; opacity:.9; white-space:nowrap; }
+    .btn-refresh, .btn-signout {
+      background:rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.35);
+      padding:.5rem .9rem; border-radius:10px; font-size:.85rem; font-weight:600; cursor:pointer;
+      transition:background .15s ease; width:auto; margin:0;
     }
-    .btn-refresh:hover { background: rgba(255,255,255,.3); }
-    .btn-refresh:disabled { opacity:.6; cursor: wait; }
+    .btn-refresh:hover, .btn-signout:hover { background:rgba(255,255,255,.3); }
+    .btn-refresh:disabled { opacity:.6; cursor:wait; }
 
-    /* ---------- Stat cards ---------- */
-    .stats-grid {
-      display: grid; gap: 1rem; margin-bottom: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-    .stat-card {
-      background: var(--card); border:1px solid var(--line);
-      border-radius: var(--radius); padding: 1.1rem 1.2rem; box-shadow: var(--shadow);
-    }
-    .stat-card .label { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight:600; }
-    .stat-card .value { font-size: 1.9rem; font-weight: 700; line-height: 1.1; margin-top: .25rem; }
-    .stat-card.total { background: var(--ink); color:#fff; border-color: var(--ink); }
-    .stat-card.total .label { color: rgba(255,255,255,.7); }
-    .stat-card .accent { width: 36px; height: 4px; border-radius: 4px; margin-top:.6rem; }
+    /* Stat cards */
+    .stats-grid { display:grid; gap:1rem; margin-bottom:1.5rem; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); }
+    .stat-card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1.1rem 1.2rem; box-shadow:var(--shadow); }
+    .stat-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+    .stat-card .value { font-size:1.9rem; font-weight:700; line-height:1.1; margin-top:.25rem; }
+    .stat-card.total { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .stat-card.total .label { color:rgba(255,255,255,.7); }
+    .stat-card .accent { width:36px; height:4px; border-radius:4px; margin-top:.6rem; }
 
-    .section-title { font-size: .8rem; text-transform: uppercase; letter-spacing:.06em; color: var(--muted); font-weight:700; margin: 0 0 .75rem; }
+    .section-title { font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700; margin:0 0 .75rem; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem 1.4rem; box-shadow:var(--shadow); margin-bottom:1.5rem; }
+    .chart-wrap { max-width:720px; margin:0 auto; }
 
-    /* ---------- Panels ---------- */
-    .panel {
-      background: var(--card); border:1px solid var(--line);
-      border-radius: var(--radius); padding: 1.25rem 1.4rem; box-shadow: var(--shadow);
-      margin-bottom: 1.5rem;
-    }
-    .chart-wrap { max-width: 720px; margin: 0 auto; }
-
-    /* ---------- Filter bar ---------- */
-    .filter-bar { display:grid; gap: .9rem; grid-template-columns: 2fr 1fr 1fr 1fr; align-items:end; }
-    @media (max-width: 900px){ .filter-bar { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px){ .filter-bar { grid-template-columns: 1fr; } }
+    /* Filters */
+    .filter-bar { display:grid; gap:.9rem; grid-template-columns:2fr 1fr 1fr 1fr; align-items:end; }
+    @media (max-width:900px){ .filter-bar { grid-template-columns:1fr 1fr; } }
+    @media (max-width:560px){ .filter-bar { grid-template-columns:1fr; } }
     .field label { font-size:.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:.35rem; }
-    .field input[type="search"], .field select {
-      margin:0; border-radius:10px; border:1px solid var(--line); background:#fff; height: 42px;
-    }
+    .field input[type="search"], .field select { margin:0; border-radius:10px; border:1px solid var(--line); background:#fff; height:42px; }
 
-    /* custom multiselect dropdown */
-    .ms { position: relative; }
-    .ms-toggle {
-      width:100%; height:42px; border:1px solid var(--line); border-radius:10px; background:#fff;
-      display:flex; align-items:center; justify-content:space-between; padding:0 .8rem; cursor:pointer;
-      font-size:.9rem; color:var(--ink);
-    }
-    .ms-toggle .chev { color: var(--muted); transition: transform .15s; }
-    .ms.open .ms-toggle .chev { transform: rotate(180deg); }
-    .ms-menu {
-      position:absolute; z-index:30; top:46px; left:0; right:0; background:#fff;
-      border:1px solid var(--line); border-radius:12px; box-shadow: var(--shadow-lg);
-      padding:.4rem; max-height: 260px; overflow:auto; display:none;
-    }
+    .ms { position:relative; }
+    .ms-toggle { width:100%; height:42px; border:1px solid var(--line); border-radius:10px; background:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 .8rem; cursor:pointer; font-size:.9rem; color:var(--ink); }
+    .ms-toggle .chev { color:var(--muted); transition:transform .15s; }
+    .ms.open .ms-toggle .chev { transform:rotate(180deg); }
+    .ms-menu { position:absolute; z-index:30; top:46px; left:0; right:0; background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow-lg); padding:.4rem; max-height:260px; overflow:auto; display:none; }
     .ms.open .ms-menu { display:block; }
-    .ms-menu label {
-      display:flex; align-items:center; gap:.55rem; padding:.45rem .55rem; border-radius:8px;
-      font-size:.88rem; cursor:pointer; text-transform:none; letter-spacing:0; color:var(--ink); font-weight:500; margin:0;
-    }
-    .ms-menu label:hover { background: var(--brand-soft); }
+    .ms-menu label { display:flex; align-items:center; gap:.55rem; padding:.45rem .55rem; border-radius:8px; font-size:.88rem; cursor:pointer; text-transform:none; letter-spacing:0; color:var(--ink); font-weight:500; margin:0; }
+    .ms-menu label:hover { background:var(--brand-soft); }
     .ms-menu input { margin:0; width:auto; }
-    .ms-count { background: var(--brand); color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:.05rem .45rem; margin-left:.4rem; }
-
+    .ms-count { background:var(--brand); color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:.05rem .45rem; margin-left:.4rem; }
     .filter-meta { display:flex; align-items:center; justify-content:space-between; margin-top:1rem; flex-wrap:wrap; gap:.5rem; }
     .filter-meta .count { font-size:.85rem; color:var(--muted); }
     .btn-clear { background:none; border:none; color:var(--brand); font-weight:600; font-size:.85rem; cursor:pointer; padding:.25rem; width:auto; margin:0; }
 
-    /* ---------- Table ---------- */
-    .table-scroll { overflow-x:auto; border-radius: var(--radius); }
+    /* Table */
+    .table-scroll { overflow-x:auto; border-radius:var(--radius); }
     table { margin:0; font-size:.88rem; }
-    thead th {
-      position: sticky; top:0; background:#faf9fe; cursor:pointer; user-select:none;
-      font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted);
-      white-space:nowrap; border-bottom:2px solid var(--line);
-    }
+    thead th { position:sticky; top:0; background:#faf9fe; cursor:pointer; user-select:none; font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); white-space:nowrap; border-bottom:2px solid var(--line); }
+    thead th.noselect { cursor:default; }
     thead th .arrow { opacity:.4; font-size:.7rem; }
     thead th.sorted .arrow { opacity:1; color:var(--brand); }
-    tbody td { vertical-align: top; border-bottom:1px solid var(--line); }
-    tbody tr:hover { background: #faf9fe; }
-    td.name { font-weight:600; min-width: 180px; }
-    td.notes { color:var(--muted); max-width: 360px; font-size:.82rem; }
-    td.contact a { word-break: break-all; }
-
+    tbody td { vertical-align:top; border-bottom:1px solid var(--line); }
+    tbody tr:hover { background:#faf9fe; }
+    td.name { font-weight:600; min-width:180px; }
+    td.notes { color:var(--muted); max-width:340px; font-size:.82rem; }
+    td.contact a { word-break:break-all; }
     .cat-tag { display:inline-block; font-size:.72rem; font-weight:600; padding:.15rem .5rem; border-radius:6px; background:var(--brand-soft); color:var(--brand); white-space:nowrap; }
-
     .badge { display:inline-block; font-size:.74rem; font-weight:700; padding:.2rem .6rem; border-radius:999px; white-space:nowrap; }
-    .badge.red    { background:var(--st-red-bg);    color:var(--st-red); }
-    .badge.yellow { background:var(--st-yellow-bg); color:var(--st-yellow); }
-    .badge.blue   { background:var(--st-blue-bg);   color:var(--st-blue); }
-    .badge.green  { background:var(--st-green-bg);  color:var(--st-green); }
-    .badge.gray   { background:#eef0f4;             color:#6b7280; }
+    .badge.red{background:var(--st-red-bg);color:var(--st-red);} .badge.yellow{background:var(--st-yellow-bg);color:var(--st-yellow);}
+    .badge.blue{background:var(--st-blue-bg);color:var(--st-blue);} .badge.green{background:var(--st-green-bg);color:var(--st-green);}
+    .badge.gray{background:#eef0f4;color:#6b7280;}
+    .btn-edit { background:var(--brand-soft); color:var(--brand); border:none; border-radius:8px; padding:.35rem .6rem; font-size:.8rem; font-weight:600; cursor:pointer; width:auto; margin:0; white-space:nowrap; }
+    .btn-edit:hover { background:#ddd2fb; }
+    td.actions { white-space:nowrap; }
 
-    /* ---------- Pagination ---------- */
+    /* Pagination */
     .pager { display:flex; align-items:center; justify-content:center; gap:.5rem; margin-top:1.1rem; flex-wrap:wrap; }
-    .pager button {
-      width:auto; margin:0; padding:.4rem .8rem; font-size:.85rem; border-radius:8px;
-      border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer;
-    }
+    .pager button { width:auto; margin:0; padding:.4rem .8rem; font-size:.85rem; border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer; }
     .pager button:hover:not(:disabled){ border-color:var(--brand); color:var(--brand); }
     .pager button:disabled { opacity:.4; cursor:not-allowed; }
     .pager .page-info { font-size:.85rem; color:var(--muted); }
 
-    /* ---------- States ---------- */
-    .state {
-      text-align:center; padding:3rem 1.5rem; background:var(--card);
-      border:1px dashed var(--line); border-radius: var(--radius); color:var(--muted);
-    }
+    /* States */
+    .state { text-align:center; padding:3rem 1.5rem; background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); color:var(--muted); }
     .state.error { border-color:#fca5a5; background:#fef2f2; color:#b91c1c; }
     .state h3 { margin-top:0; }
-    .spinner {
-      width:34px; height:34px; border:3px solid var(--brand-soft); border-top-color:var(--brand);
-      border-radius:50%; animation:spin 1s linear infinite; margin: 0 auto 1rem;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { width:34px; height:34px; border:3px solid var(--brand-soft); border-top-color:var(--brand); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 1rem; }
+    @keyframes spin { to { transform:rotate(360deg); } }
     code.url { background:#f1f0f8; padding:.15rem .4rem; border-radius:6px; font-size:.82rem; }
 
-    /* ---------- Password gate ---------- */
-    #gate { position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:100; }
-    #gate .box { background:var(--card); padding:2rem; border-radius:var(--radius); box-shadow:var(--shadow-lg); width:min(360px,90vw); text-align:center; }
-    #gate input { margin:.75rem 0; }
-    #gate .err { color:var(--st-red); font-size:.85rem; min-height:1.2em; }
+    /* Gate (name + access code) */
+    #gate { position:fixed; inset:0; background:linear-gradient(135deg,#f6f5fb 0%,#ede9fe 100%); display:flex; align-items:center; justify-content:center; z-index:100; padding:1rem; }
+    #gate .box { background:var(--card); padding:2.25rem; border-radius:var(--radius); box-shadow:var(--shadow-lg); width:min(400px,94vw); }
+    #gate h2 { margin:0 0 .25rem; font-size:1.3rem; }
+    #gate p.lede { margin:0 0 1.25rem; color:var(--muted); font-size:.9rem; }
+    #gate label { font-size:.75rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+    #gate input { margin:.35rem 0 1rem; border-radius:10px; }
+    #gate .err { color:var(--st-red); font-size:.85rem; min-height:1.2em; margin-bottom:.5rem; }
+    #gate button { width:100%; margin:0; }
+
+    /* Edit modal */
+    .modal-bg { position:fixed; inset:0; background:rgba(30,27,46,.45); display:none; align-items:center; justify-content:center; z-index:90; padding:1rem; }
+    .modal-bg.show { display:flex; }
+    .modal { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow-lg); width:min(460px,96vw); padding:1.6rem 1.7rem; }
+    .modal h3 { margin:0 0 .2rem; font-size:1.15rem; }
+    .modal .ctx { color:var(--muted); font-size:.82rem; margin:0 0 1.2rem; }
+    .modal label { font-size:.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:.3rem; }
+    .modal .grp { margin-bottom:1rem; }
+    .modal input, .modal select { margin:0; border-radius:10px; border:1px solid var(--line); }
+    .modal-actions { display:flex; gap:.6rem; justify-content:flex-end; margin-top:.5rem; }
+    .modal-actions button { width:auto; margin:0; }
+    .btn-ghost { background:#fff; color:var(--ink); border:1px solid var(--line); }
+    .modal .save-err { color:var(--st-red); font-size:.82rem; min-height:1em; }
+
+    /* Toast */
+    #toast { position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%) translateY(120%); background:var(--ink); color:#fff; padding:.7rem 1.2rem; border-radius:12px; box-shadow:var(--shadow-lg); font-size:.9rem; z-index:120; transition:transform .25s ease; }
+    #toast.show { transform:translateX(-50%) translateY(0); }
+    #toast.err { background:var(--st-red); }
   </style>
 </head>
 <body>
 
   <!-- ============================================================
-       CONFIGURATION  —  edit these three constants only
+       CONFIGURATION — edit these two constants only
        ============================================================ -->
   <script>
-    /* 1) PASTE YOUR PUBLISHED GOOGLE SHEET CSV URL HERE.
-          It must be the "Publish to web -> Comma-separated values (.csv)" link,
-          which looks like:
-          https://docs.google.com/spreadsheets/d/e/2PACX-xxxx/pub?output=csv
-          Leave as "" and the page will show setup instructions instead of erroring. */
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRndjfinZufR49wxq352YqbfmkjFg1NW29UlyPVDY-p6X12jT8cg-1fkE9zYmAfFXnw1ND1VmuSoE_k/pub?output=csv";
+    /* 1) PASTE YOUR APPS SCRIPT WEB APP URL HERE (ends with /exec).
+          Get it from: Google Sheet → Extensions → Apps Script → Deploy → Web app.
+          See outreach-apps-script.gs for the full setup steps.
+          Leave "" and the page shows setup instructions instead of erroring. */
+    const APPS_SCRIPT_URL = "";
 
-    /* 2) Optional password gate. Leave "" to disable (no gate shown).
-          NOTE: this is client-side only and visible in page source — it deters
-          casual viewers but is NOT real security. The published CSV is public regardless. */
-    const PASSWORD = "";
-
-    /* 3) Auto-refresh interval in minutes (manual Refresh button always available). */
+    /* 2) Auto-refresh interval in minutes (manual Refresh button always available). */
     const AUTO_REFRESH_MINUTES = 5;
+
+    /* NOTE: the access CODE is NOT stored here — it lives in the Apps Script and is
+       typed by each user at the gate, so it never appears in this public page. */
   </script>
 
-  <!-- Optional password gate -->
+  <!-- Name + access code gate -->
   <div id="gate" hidden>
     <div class="box">
-      <h3>🔒 Protected</h3>
-      <p>Enter the password to view the tracker.</p>
-      <input type="password" id="gate-input" placeholder="Password" />
+      <h2>📬 Nas.Creatives Publicity Tracker</h2>
+      <p class="lede">Enter your name and the team access code to continue.</p>
+      <label for="gate-name">Your name</label>
+      <input type="text" id="gate-name" placeholder="e.g. Wind Divin" autocomplete="name" />
+      <label for="gate-code">Access code</label>
+      <input type="password" id="gate-code" placeholder="Team code" />
       <div class="err" id="gate-err"></div>
-      <button id="gate-btn">Unlock</button>
+      <button id="gate-btn" aria-busy="false">Enter dashboard</button>
     </div>
   </div>
 
   <main class="container" id="app" hidden>
-
-    <!-- Header -->
     <header class="app-header">
       <div>
-        <h1>📬 Wind Divin Outreach Tracker</h1>
-        <p class="sub">Live view · Nas.Creatives Mgmt · read-only — edits happen in the Google Sheet</p>
+        <h1>📬 Nas.Creatives Publicity Tracker</h1>
+        <p class="sub">Live · Nas.Creatives Mgmt · edits sync to Google Sheets</p>
       </div>
       <div class="header-actions">
+        <span class="whoami" id="whoami"></span>
         <span class="updated" id="updated">—</span>
         <button class="btn-refresh" id="refresh">↻ Refresh</button>
+        <button class="btn-signout" id="signout">Sign out</button>
       </div>
     </header>
 
-    <!-- Loading / error / setup states -->
     <div id="status-area"></div>
 
-    <!-- Everything below is hidden until data loads -->
     <div id="content" hidden>
-
-      <!-- Summary stats -->
       <div class="stats-grid" id="stats"></div>
 
-      <!-- Chart -->
       <div class="panel">
         <p class="section-title">Contacts by status</p>
         <div class="chart-wrap"><canvas id="statusChart" height="120"></canvas></div>
       </div>
 
-      <!-- Filters -->
       <div class="panel">
         <p class="section-title">Filter &amp; search</p>
         <div class="filter-bar">
@@ -251,17 +218,11 @@
           </div>
           <div class="field">
             <label>Category</label>
-            <div class="ms" id="ms-category">
-              <div class="ms-toggle" tabindex="0"><span class="ms-label">All categories</span><span class="chev">▾</span></div>
-              <div class="ms-menu"></div>
-            </div>
+            <div class="ms" id="ms-category"><div class="ms-toggle" tabindex="0"><span class="ms-label">All categories</span><span class="chev">▾</span></div><div class="ms-menu"></div></div>
           </div>
           <div class="field">
             <label>Status</label>
-            <div class="ms" id="ms-status">
-              <div class="ms-toggle" tabindex="0"><span class="ms-label">All statuses</span><span class="chev">▾</span></div>
-              <div class="ms-menu"></div>
-            </div>
+            <div class="ms" id="ms-status"><div class="ms-toggle" tabindex="0"><span class="ms-label">All statuses</span><span class="chev">▾</span></div><div class="ms-menu"></div></div>
           </div>
           <div class="field">
             <label for="region">Region</label>
@@ -274,7 +235,6 @@
         </div>
       </div>
 
-      <!-- Table -->
       <div class="panel">
         <div class="table-scroll">
           <table>
@@ -284,386 +244,362 @@
         </div>
         <div class="pager" id="pager"></div>
       </div>
-
     </div>
   </main>
+
+  <!-- Edit modal -->
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal">
+      <h3 id="modal-title">Edit contact</h3>
+      <p class="ctx" id="modal-ctx"></p>
+      <div class="grp">
+        <label for="m-status">Status</label>
+        <select id="m-status">
+          <option>Not contacted</option><option>Contacted</option>
+          <option>Awaiting reply</option><option>Done</option>
+        </select>
+      </div>
+      <div class="grp">
+        <label for="m-last">Last contacted</label>
+        <input type="date" id="m-last" />
+      </div>
+      <div class="grp">
+        <label for="m-next">Next step</label>
+        <input type="text" id="m-next" placeholder="e.g. Follow up in 2 weeks" />
+      </div>
+      <div class="grp">
+        <label for="m-assigned">Assigned to</label>
+        <input type="text" id="m-assigned" placeholder="Artist name" />
+      </div>
+      <div class="save-err" id="m-err"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="m-cancel">Cancel</button>
+        <button id="m-save" aria-busy="false">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
 
   <script>
   /* ============================================================
      APP LOGIC  (vanilla JS, no frameworks)
      ============================================================ */
-
-  // Table columns: [key in row object, display label, css class]
   const COLUMNS = [
-    ["Name",          "Name",          "name"],
-    ["Category",      "Category",      "cat"],
-    ["Region",        "Region",        "region"],
-    ["Contact Info",  "Contact",       "contact"],
-    ["Status",        "Status",        "status"],
-    ["Last Contacted","Last Contacted","last"],
-    ["Next Step",     "Next Step",     "next"],
-    ["Assigned To",   "Assigned To",   "assigned"],
-    ["Notes",         "Notes",         "notes"],
+    ["Name","Name","name",false],
+    ["Category","Category","cat",false],
+    ["Region","Region","region",false],
+    ["Contact Info","Contact","contact",false],
+    ["Status","Status","status",false],
+    ["Last Contacted","Last Contacted","last",false],
+    ["Next Step","Next Step","next",false],
+    ["Assigned To","Assigned To","assigned",false],
+    ["Notes","Notes","notes",false],
   ];
   const PER_PAGE = 20;
+  const LS_KEY = "ncpt_session"; // {name, code}
 
-  // App state
+  let session = null;        // {name, code}
   let allRows = [];
   let filtered = [];
   let page = 1;
-  let sortKey = "Name";
-  let sortDir = 1; // 1 asc, -1 desc
-  let chart = null;
-  let refreshTimer = null;
+  let sortKey = "Name", sortDir = 1;
+  let chart = null, refreshTimer = null;
+  let editingKey = null;
 
-  const $ = (sel) => document.querySelector(sel);
+  const $ = (s) => document.querySelector(s);
 
-  /* ---------- CSV parsing (handles quoted fields, commas, newlines) ---------- */
-  function parseCSV(text) {
-    const rows = [];
-    let row = [], field = "", inQuotes = false;
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i], next = text[i + 1];
-      if (inQuotes) {
-        if (c === '"' && next === '"') { field += '"'; i++; }
-        else if (c === '"') { inQuotes = false; }
-        else { field += c; }
-      } else {
-        if (c === '"') { inQuotes = true; }
-        else if (c === ',') { row.push(field); field = ""; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
-        else if (c === '\r') { /* ignore */ }
-        else { field += c; }
-      }
-    }
-    if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
-    return rows;
-  }
-
-  function rowsToObjects(rows) {
-    if (!rows.length) return [];
-    const headers = rows[0].map(h => h.trim());
-    return rows.slice(1)
-      .filter(r => r.some(c => c.trim() !== "")) // drop blank lines
-      .map(r => {
-        const o = {};
-        headers.forEach((h, i) => { o[h] = (r[i] || "").trim(); });
-        return o;
-      });
-  }
-
-  /* ---------- Status normalization & coloring ---------- */
-  // Returns { label, badgeClass } for any status string (case-insensitive).
+  /* ---------- Status helpers ---------- */
   function statusInfo(raw) {
-    const s = (raw || "").toLowerCase().trim();
-    if (s.startsWith("not contact"))  return { label: raw || "Not contacted", cls: "red" };
-    if (s.startsWith("awaiting"))     return { label: raw, cls: "blue" };
-    if (s === "done" || s.startsWith("complete")) return { label: raw, cls: "green" };
-    if (s.startsWith("contact"))      return { label: raw, cls: "yellow" }; // "Contacted"
-    if (!s) return { label: "—", cls: "gray" };
-    return { label: raw, cls: "gray" };
+    const s = (raw||"").toLowerCase().trim();
+    if (s.startsWith("not contact")) return { label: raw||"Not contacted", cls:"red" };
+    if (s.startsWith("awaiting"))    return { label: raw, cls:"blue" };
+    if (s === "done" || s.startsWith("complete")) return { label: raw, cls:"green" };
+    if (s.startsWith("contact"))     return { label: raw, cls:"yellow" };
+    if (!s) return { label:"—", cls:"gray" };
+    return { label: raw, cls:"gray" };
   }
-
-  // Canonical status buckets for the chart & stat cards
   const STATUS_BUCKETS = [
-    { key: "Not Contacted", match: s => s.startsWith("not contact"), color: "#ef4444" },
-    { key: "Contacted",     match: s => s.startsWith("contact"),     color: "#d97706" },
-    { key: "Awaiting Reply",match: s => s.startsWith("awaiting"),    color: "#2563eb" },
-    { key: "Done",          match: s => s === "done" || s.startsWith("complete"), color: "#16a34a" },
+    { key:"Not Contacted", match:s=>s.startsWith("not contact"), color:"#ef4444" },
+    { key:"Contacted",     match:s=>s.startsWith("contact"),     color:"#d97706" },
+    { key:"Awaiting Reply",match:s=>s.startsWith("awaiting"),    color:"#2563eb" },
+    { key:"Done",          match:s=>s==="done"||s.startsWith("complete"), color:"#16a34a" },
   ];
-  function bucketOf(raw) {
-    const s = (raw || "").toLowerCase().trim();
-    const b = STATUS_BUCKETS.find(b => b.match(s));
-    return b ? b.key : "Other";
+  function bucketOf(raw){ const s=(raw||"").toLowerCase().trim(); const b=STATUS_BUCKETS.find(b=>b.match(s)); return b?b.key:"Other"; }
+
+  function contactCell(value){
+    const v=(value||"").trim();
+    if(!v) return "—";
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return `<a href="mailto:${escAttr(v)}">${esc(v)}</a>`;
+    if(/^https?:\/\//i.test(v)){ const label=v.replace(/^https?:\/\//i,"").replace(/\/$/,""); return `<a href="${escAttr(v)}" target="_blank" rel="noopener">${esc(label)}</a>`; }
+    return esc(v);
+  }
+  function esc(s){ return (s==null?"":String(s)).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+  function escAttr(s){ return esc(s); }
+
+  /* ---------- Networking (Apps Script) ---------- */
+  // GET data with the access code
+  async function apiGetData(code){
+    const url = `${APPS_SCRIPT_URL}?mode=data&code=${encodeURIComponent(code)}&_=${Date.now()}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    return res.json();
+  }
+  // POST (login / update). Uses text/plain to avoid a CORS preflight.
+  async function apiPost(payload){
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      headers:{ "Content-Type":"text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+      redirect:"follow",
+    });
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    return res.json();
   }
 
-  /* ---------- Contact cell: render mailto / link ---------- */
-  function contactCell(value) {
-    const v = (value || "").trim();
-    if (!v) return "—";
-    if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) {
-      return `<a href="mailto:${escapeAttr(v)}">${escapeHtml(v)}</a>`;
-    }
-    if (/^https?:\/\//i.test(v)) {
-      const label = v.replace(/^https?:\/\//i, "").replace(/\/$/, "");
-      return `<a href="${escapeAttr(v)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
-    }
-    return escapeHtml(v); // plain text (e.g. "Cultural attache at diplomatic missions")
+  /* ---------- Gate ---------- */
+  function initGate(){
+    if(!APPS_SCRIPT_URL){ renderSetup(true); return; }   // no backend configured yet
+    const saved = loadSession();
+    if(saved){ session = saved; enterApp(); return; }     // already signed in on this device
+    $("#gate").hidden = false;
+    $("#gate-name").focus();
+    $("#gate-btn").addEventListener("click", submitGate);
+    $("#gate-code").addEventListener("keydown", e=>{ if(e.key==="Enter") submitGate(); });
+    $("#gate-name").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#gate-code").focus(); });
   }
-
-  function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-  function escapeAttr(s){ return escapeHtml(s); }
-
-  /* ---------- Data load ---------- */
-  async function loadData(isManual) {
-    const btn = $("#refresh");
-    btn.disabled = true; btn.textContent = "↻ Loading…";
-
-    if (!CSV_URL) { renderSetup(); btn.disabled = false; btn.textContent = "↻ Refresh"; return; }
-
-    if (!allRows.length) showLoading();
+  async function submitGate(){
+    const name = $("#gate-name").value.trim();
+    const code = $("#gate-code").value;
+    const err = $("#gate-err");
+    if(!name){ err.textContent="Please enter your name."; return; }
+    if(!code){ err.textContent="Please enter the access code."; return; }
+    err.textContent=""; const btn=$("#gate-btn"); btn.setAttribute("aria-busy","true"); btn.textContent="Checking…";
     try {
-      // cache-bust so manual refresh always gets the latest publish
-      const url = CSV_URL + (CSV_URL.includes("?") ? "&" : "?") + "_=" + Date.now();
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const text = await res.text();
-      if (text.trim().startsWith("<")) throw new Error("Got HTML, not CSV — check the publish settings/URL.");
-      allRows = rowsToObjects(parseCSV(text));
-      if (!allRows.length) throw new Error("Sheet appears to be empty.");
-      clearState();
-      buildFilterOptions();
-      applyFilters();
-      renderStats();
-      renderChart();
-      $("#updated").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    } catch (err) {
-      renderError(err.message);
+      const data = await apiPost({ mode:"login", name, code });
+      if(!data.ok){ err.textContent = data.error || "Could not sign in."; return; }
+      session = { name, code };
+      saveSession(session);
+      allRows = data.rows || [];
+      $("#gate").hidden = true;
+      enterApp(true);
+    } catch(e){
+      err.textContent = "Network error — check the dashboard's APPS_SCRIPT_URL. ("+e.message+")";
     } finally {
-      btn.disabled = false; btn.textContent = "↻ Refresh";
+      btn.setAttribute("aria-busy","false"); btn.textContent="Enter dashboard";
     }
   }
+  function loadSession(){ try { return JSON.parse(localStorage.getItem(LS_KEY)); } catch(e){ return null; } }
+  function saveSession(s){ localStorage.setItem(LS_KEY, JSON.stringify(s)); }
+  function signOut(){ localStorage.removeItem(LS_KEY); location.reload(); }
 
-  /* ---------- State renderers ---------- */
-  function showLoading() {
-    $("#content").hidden = true;
-    $("#status-area").innerHTML = `<div class="state"><div class="spinner"></div><p>Loading contacts…</p></div>`;
+  /* ---------- App boot ---------- */
+  function enterApp(haveData){
+    $("#app").hidden = false;
+    $("#whoami").textContent = "👤 " + session.name;
+    initControls();
+    if(haveData && allRows.length){ afterLoad(); } else { loadData(false); }
+    if(AUTO_REFRESH_MINUTES>0){ if(refreshTimer) clearInterval(refreshTimer); refreshTimer=setInterval(()=>loadData(false), AUTO_REFRESH_MINUTES*60*1000); }
   }
-  function clearState() { $("#status-area").innerHTML = ""; $("#content").hidden = false; }
-  function renderError(msg) {
-    $("#content").hidden = true;
-    $("#status-area").innerHTML = `
-      <div class="state error">
-        <h3>⚠️ Couldn't load the tracker</h3>
-        <p>${escapeHtml(msg)}</p>
-        <p style="font-size:.85rem">Check that the Google Sheet is still published to the web as CSV and that the URL in <code class="url">CSV_URL</code> is correct. Then hit Refresh.</p>
-      </div>`;
+
+  async function loadData(){
+    const btn=$("#refresh"); btn.disabled=true; btn.textContent="↻ Loading…";
+    if(!allRows.length) showLoading();
+    try{
+      const data = await apiGetData(session.code);
+      if(!data.ok) throw new Error(data.error || "Request failed");
+      allRows = data.rows || [];
+      afterLoad();
+    }catch(e){ renderError(e.message); }
+    finally{ btn.disabled=false; btn.textContent="↻ Refresh"; }
   }
-  function renderSetup() {
-    $("#content").hidden = true;
-    $("#status-area").innerHTML = `
-      <div class="state">
-        <h3>🛠️ Almost ready — add your sheet URL</h3>
-        <p>Open this file and paste your published Google Sheet CSV link into the
-        <code class="url">CSV_URL</code> constant near the top of the page.</p>
-        <p style="font-size:.85rem">Google Sheets → <b>File → Share → Publish to web → Comma-separated values (.csv)</b>,
-        then copy the <code class="url">…/pub?output=csv</code> URL.</p>
-      </div>`;
+  function afterLoad(){
+    clearState(); buildFilterOptions(); applyFilters(); renderStats(); renderChart();
+    $("#updated").textContent = "Updated " + new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+  }
+
+  /* ---------- States ---------- */
+  function showLoading(){ $("#content").hidden=true; $("#status-area").innerHTML=`<div class="state"><div class="spinner"></div><p>Loading contacts…</p></div>`; }
+  function clearState(){ $("#status-area").innerHTML=""; $("#content").hidden=false; }
+  function renderError(msg){
+    $("#content").hidden=true;
+    $("#status-area").innerHTML=`<div class="state error"><h3>⚠️ Couldn't load the tracker</h3><p>${esc(msg)}</p><p style="font-size:.85rem">Confirm the Apps Script Web App is deployed (access: Anyone) and that <code class="url">APPS_SCRIPT_URL</code> is correct, then hit Refresh.</p></div>`;
+  }
+  function renderSetup(){
+    $("#gate").hidden=true; $("#app").hidden=false; $("#content").hidden=true;
+    $("#whoami").textContent=""; $("#signout").style.display="none"; $("#refresh").style.display="none";
+    $("#status-area").innerHTML=`<div class="state"><h3>🛠️ Backend not connected yet</h3>
+      <p>Deploy the Google Apps Script (see <code class="url">outreach-apps-script.gs</code>), then paste its Web App URL into the <code class="url">APPS_SCRIPT_URL</code> constant near the top of this page.</p>
+      <p style="font-size:.85rem">Sheet → Extensions → Apps Script → Deploy → Web app → copy the <code class="url">…/exec</code> URL.</p></div>`;
   }
 
   /* ---------- Stats ---------- */
-  function renderStats() {
-    const total = allRows.length;
-    const catCounts = countBy(allRows, "Category");
-    const wrap = $("#stats");
-    const catCards = [
-      { label: "Radio",        cat: "Radio",            accent: "#6d28d9" },
-      { label: "Sync",         cat: "Sync Licensing",   accent: "#0ea5e9" },
-      { label: "Venues / NGOs",cat: "Venue/Festival/NGO", accent: "#f59e0b" },
-      { label: "Booking",      cat: "Booking Platform", accent: "#16a34a" },
+  function renderStats(){
+    const total=allRows.length, catCounts=countBy(allRows,"Category");
+    const catCards=[
+      {label:"Radio",cat:"Radio",accent:"#6d28d9"},
+      {label:"Sync",cat:"Sync Licensing",accent:"#0ea5e9"},
+      {label:"Venues / NGOs",cat:"Venue/Festival/NGO",accent:"#f59e0b"},
+      {label:"Booking",cat:"Booking Platform",accent:"#16a34a"},
     ];
-    let html = `<div class="stat-card total"><div class="label">Total contacts</div><div class="value">${total}</div></div>`;
-    catCards.forEach(c => {
-      html += `<div class="stat-card"><div class="label">${c.label}</div><div class="value">${catCounts[c.cat] || 0}</div><div class="accent" style="background:${c.accent}"></div></div>`;
-    });
-    // status cards
-    STATUS_BUCKETS.forEach(b => {
-      const n = allRows.filter(r => bucketOf(r.Status) === b.key).length;
-      html += `<div class="stat-card"><div class="label">${b.key}</div><div class="value">${n}</div><div class="accent" style="background:${b.color}"></div></div>`;
-    });
-    wrap.innerHTML = html;
+    let html=`<div class="stat-card total"><div class="label">Total contacts</div><div class="value">${total}</div></div>`;
+    catCards.forEach(c=>{ html+=`<div class="stat-card"><div class="label">${c.label}</div><div class="value">${catCounts[c.cat]||0}</div><div class="accent" style="background:${c.accent}"></div></div>`; });
+    STATUS_BUCKETS.forEach(b=>{ const n=allRows.filter(r=>bucketOf(r.Status)===b.key).length; html+=`<div class="stat-card"><div class="label">${b.key}</div><div class="value">${n}</div><div class="accent" style="background:${b.color}"></div></div>`; });
+    $("#stats").innerHTML=html;
   }
-
-  function countBy(arr, key) {
-    return arr.reduce((m, r) => { const v = r[key] || "—"; m[v] = (m[v]||0)+1; return m; }, {});
-  }
+  function countBy(arr,key){ return arr.reduce((m,r)=>{ const v=r[key]||"—"; m[v]=(m[v]||0)+1; return m; },{}); }
 
   /* ---------- Chart ---------- */
-  function renderChart() {
-    const labels = STATUS_BUCKETS.map(b => b.key);
-    const data = STATUS_BUCKETS.map(b => allRows.filter(r => bucketOf(r.Status) === b.key).length);
-    const colors = STATUS_BUCKETS.map(b => b.color);
-    const ctx = $("#statusChart");
-    if (chart) chart.destroy();
-    chart = new Chart(ctx, {
-      type: "bar",
-      data: { labels, datasets: [{ label: "Contacts", data, backgroundColor: colors, borderRadius: 8, maxBarThickness: 90 }] },
-      options: {
-        responsive: true, maintainAspectRatio: true,
-        plugins: { legend: { display: false }, tooltip: { backgroundColor: "#1e1b2e" } },
-        scales: {
-          y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: "#eee" } },
-          x: { grid: { display: false } }
-        }
-      }
+  function renderChart(){
+    const labels=STATUS_BUCKETS.map(b=>b.key);
+    const data=STATUS_BUCKETS.map(b=>allRows.filter(r=>bucketOf(r.Status)===b.key).length);
+    const colors=STATUS_BUCKETS.map(b=>b.color);
+    if(chart) chart.destroy();
+    chart=new Chart($("#statusChart"),{ type:"bar",
+      data:{ labels, datasets:[{ label:"Contacts", data, backgroundColor:colors, borderRadius:8, maxBarThickness:90 }] },
+      options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{display:false}, tooltip:{backgroundColor:"#1e1b2e"} },
+        scales:{ y:{ beginAtZero:true, ticks:{precision:0}, grid:{color:"#eee"} }, x:{ grid:{display:false} } } }
     });
   }
 
   /* ---------- Filters ---------- */
-  function uniqueSorted(key) { return [...new Set(allRows.map(r => (r[key]||"").trim()).filter(Boolean))].sort(); }
-
-  function buildFilterOptions() {
-    // Category multiselect (use canonical categories present in data)
-    buildMultiselect("ms-category", uniqueSorted("Category"), "All categories");
-    // Status multiselect
-    buildMultiselect("ms-status", uniqueSorted("Status"), "All statuses");
-    // Region single-select
-    const region = $("#region");
-    const cur = region.value;
-    region.innerHTML = `<option value="">All regions</option>` + uniqueSorted("Region").map(r => `<option value="${escapeAttr(r)}">${escapeHtml(r)}</option>`).join("");
-    region.value = cur;
+  function uniqueSorted(key){ return [...new Set(allRows.map(r=>String(r[key]||"").trim()).filter(Boolean))].sort(); }
+  function buildFilterOptions(){
+    buildMs("ms-category", uniqueSorted("Category"), "All categories");
+    buildMs("ms-status", uniqueSorted("Status"), "All statuses");
+    const region=$("#region"); const cur=region.value;
+    region.innerHTML=`<option value="">All regions</option>`+uniqueSorted("Region").map(r=>`<option value="${escAttr(r)}">${esc(r)}</option>`).join("");
+    region.value=cur;
   }
-
-  function buildMultiselect(id, values, allLabel) {
-    const root = document.getElementById(id);
-    const menu = root.querySelector(".ms-menu");
-    // preserve checked values across rebuilds
-    const checked = new Set([...menu.querySelectorAll("input:checked")].map(i => i.value));
-    menu.innerHTML = values.map(v =>
-      `<label><input type="checkbox" value="${escapeAttr(v)}" ${checked.has(v)?"checked":""}>${escapeHtml(v)}</label>`
-    ).join("");
-    menu.querySelectorAll("input").forEach(cb => cb.addEventListener("change", () => { updateMsLabel(root, allLabel); page = 1; applyFilters(); }));
-    updateMsLabel(root, allLabel);
+  function buildMs(id,values,allLabel){
+    const root=document.getElementById(id), menu=root.querySelector(".ms-menu");
+    const checked=new Set([...menu.querySelectorAll("input:checked")].map(i=>i.value));
+    menu.innerHTML=values.map(v=>`<label><input type="checkbox" value="${escAttr(v)}" ${checked.has(v)?"checked":""}>${esc(v)}</label>`).join("");
+    menu.querySelectorAll("input").forEach(cb=>cb.addEventListener("change",()=>{ updateMsLabel(root,allLabel); page=1; applyFilters(); }));
+    updateMsLabel(root,allLabel);
   }
-
-  function updateMsLabel(root, allLabel) {
-    const sel = [...root.querySelectorAll("input:checked")];
-    const labelEl = root.querySelector(".ms-label");
-    if (sel.length === 0) labelEl.innerHTML = allLabel;
-    else if (sel.length === 1) labelEl.textContent = sel[0].value;
-    else labelEl.innerHTML = `${sel.length} selected <span class="ms-count">${sel.length}</span>`;
+  function updateMsLabel(root,allLabel){
+    const sel=[...root.querySelectorAll("input:checked")], labelEl=root.querySelector(".ms-label");
+    if(sel.length===0) labelEl.innerHTML=allLabel;
+    else if(sel.length===1) labelEl.textContent=sel[0].value;
+    else labelEl.innerHTML=`${sel.length} selected <span class="ms-count">${sel.length}</span>`;
   }
-
-  function getMsValues(id) { return [...document.getElementById(id).querySelectorAll("input:checked")].map(i => i.value); }
-
-  function applyFilters() {
-    const q = $("#search").value.toLowerCase().trim();
-    const cats = getMsValues("ms-category");
-    const stats = getMsValues("ms-status");
-    const region = $("#region").value;
-
-    filtered = allRows.filter(r => {
-      if (cats.length && !cats.includes(r.Category)) return false;
-      if (stats.length && !stats.includes(r.Status)) return false;
-      if (region && r.Region !== region) return false;
-      if (q) {
-        const hay = Object.values(r).join(" ").toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
+  function msValues(id){ return [...document.getElementById(id).querySelectorAll("input:checked")].map(i=>i.value); }
+  function applyFilters(){
+    const q=$("#search").value.toLowerCase().trim();
+    const cats=msValues("ms-category"), stats=msValues("ms-status"), region=$("#region").value;
+    filtered=allRows.filter(r=>{
+      if(cats.length && !cats.includes(r.Category)) return false;
+      if(stats.length && !stats.includes(r.Status)) return false;
+      if(region && r.Region!==region) return false;
+      if(q && !Object.values(r).join(" ").toLowerCase().includes(q)) return false;
       return true;
     });
-    sortRows();
-    renderTable();
+    sortRows(); renderTable();
   }
+  function sortRows(){ filtered.sort((a,b)=>{ const va=String(a[sortKey]||"").toLowerCase(), vb=String(b[sortKey]||"").toLowerCase(); return va<vb?-sortDir:va>vb?sortDir:0; }); }
 
-  function sortRows() {
-    filtered.sort((a, b) => {
-      const va = (a[sortKey]||"").toLowerCase(), vb = (b[sortKey]||"").toLowerCase();
-      if (va < vb) return -1 * sortDir;
-      if (va > vb) return  1 * sortDir;
-      return 0;
-    });
+  /* ---------- Table ---------- */
+  function renderHead(){
+    let html = COLUMNS.map(([key,label])=>{ const sorted=key===sortKey; const arrow=sorted?(sortDir===1?"▲":"▼"):"↕"; return `<th data-key="${escAttr(key)}" class="${sorted?"sorted":""}">${esc(label)} <span class="arrow">${arrow}</span></th>`; }).join("");
+    html += `<th class="noselect">Edit</th>`;
+    $("#head-row").innerHTML=html;
+    $("#head-row").querySelectorAll("th[data-key]").forEach(th=>th.addEventListener("click",()=>{ const k=th.dataset.key; if(k===sortKey) sortDir*=-1; else { sortKey=k; sortDir=1; } sortRows(); renderTable(); }));
   }
-
-  /* ---------- Table render ---------- */
-  function renderHead() {
-    $("#head-row").innerHTML = COLUMNS.map(([key, label]) => {
-      const sorted = key === sortKey;
-      const arrow = sorted ? (sortDir === 1 ? "▲" : "▼") : "↕";
-      return `<th data-key="${escapeAttr(key)}" class="${sorted?"sorted":""}">${escapeHtml(label)} <span class="arrow">${arrow}</span></th>`;
-    }).join("");
-    $("#head-row").querySelectorAll("th").forEach(th => th.addEventListener("click", () => {
-      const key = th.dataset.key;
-      if (key === sortKey) sortDir *= -1; else { sortKey = key; sortDir = 1; }
-      sortRows(); renderTable(); renderHead();
-    }));
-  }
-
-  function renderTable() {
+  function renderTable(){
     renderHead();
-    const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * PER_PAGE;
-    const slice = filtered.slice(start, start + PER_PAGE);
-    const body = $("#body");
-
-    if (!slice.length) {
-      body.innerHTML = `<tr><td colspan="${COLUMNS.length}" style="text-align:center;color:var(--muted);padding:2rem">No contacts match these filters.</td></tr>`;
+    const totalPages=Math.max(1,Math.ceil(filtered.length/PER_PAGE));
+    if(page>totalPages) page=totalPages;
+    const start=(page-1)*PER_PAGE, slice=filtered.slice(start,start+PER_PAGE), body=$("#body");
+    if(!slice.length){
+      body.innerHTML=`<tr><td colspan="${COLUMNS.length+1}" style="text-align:center;color:var(--muted);padding:2rem">No contacts match these filters.</td></tr>`;
     } else {
-      body.innerHTML = slice.map(r => "<tr>" + COLUMNS.map(([key,,cls]) => {
-        let inner;
-        if (cls === "contact")      inner = contactCell(r[key]);
-        else if (cls === "status")  { const s = statusInfo(r[key]); inner = `<span class="badge ${s.cls}">${escapeHtml(s.label)}</span>`; }
-        else if (cls === "cat")     inner = `<span class="cat-tag">${escapeHtml(r[key]||"—")}</span>`;
-        else                        inner = escapeHtml(r[key]||"") || "—";
-        return `<td class="${cls}">${inner}</td>`;
-      }).join("") + "</tr>").join("");
+      body.innerHTML=slice.map(r=>{
+        const cells=COLUMNS.map(([key,,cls])=>{
+          let inner;
+          if(cls==="contact") inner=contactCell(r[key]);
+          else if(cls==="status"){ const s=statusInfo(r[key]); inner=`<span class="badge ${s.cls}">${esc(s.label)}</span>`; }
+          else if(cls==="cat") inner=`<span class="cat-tag">${esc(r[key]||"—")}</span>`;
+          else inner=esc(r[key]||"")||"—";
+          return `<td class="${cls}">${inner}</td>`;
+        }).join("");
+        return `<tr>${cells}<td class="actions"><button class="btn-edit" data-key="${escAttr(r.Name)}">✏️ Edit</button></td></tr>`;
+      }).join("");
+      body.querySelectorAll(".btn-edit").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.key)));
     }
-
-    $("#result-count").textContent = `${filtered.length} of ${allRows.length} contacts`;
+    $("#result-count").textContent=`${filtered.length} of ${allRows.length} contacts`;
     renderPager(totalPages);
   }
-
-  function renderPager(totalPages) {
-    const p = $("#pager");
-    if (totalPages <= 1) { p.innerHTML = ""; return; }
-    p.innerHTML = `
-      <button id="first" ${page===1?"disabled":""}>« First</button>
-      <button id="prev"  ${page===1?"disabled":""}>‹ Prev</button>
+  function renderPager(totalPages){
+    const p=$("#pager");
+    if(totalPages<=1){ p.innerHTML=""; return; }
+    p.innerHTML=`<button id="first" ${page===1?"disabled":""}>« First</button>
+      <button id="prev" ${page===1?"disabled":""}>‹ Prev</button>
       <span class="page-info">Page ${page} of ${totalPages}</span>
-      <button id="next"  ${page===totalPages?"disabled":""}>Next ›</button>
-      <button id="last"  ${page===totalPages?"disabled":""}>Last »</button>`;
-    $("#first").onclick = () => { page = 1; renderTable(); };
-    $("#prev").onclick  = () => { page--;   renderTable(); };
-    $("#next").onclick  = () => { page++;   renderTable(); };
-    $("#last").onclick  = () => { page = totalPages; renderTable(); };
+      <button id="next" ${page===totalPages?"disabled":""}>Next ›</button>
+      <button id="last" ${page===totalPages?"disabled":""}>Last »</button>`;
+    $("#first").onclick=()=>{page=1;renderTable();}; $("#prev").onclick=()=>{page--;renderTable();};
+    $("#next").onclick=()=>{page++;renderTable();}; $("#last").onclick=()=>{page=totalPages;renderTable();};
   }
 
-  /* ---------- Wire up filter controls ---------- */
-  function initControls() {
-    $("#search").addEventListener("input", () => { page = 1; applyFilters(); });
-    $("#region").addEventListener("change", () => { page = 1; applyFilters(); });
-    $("#refresh").addEventListener("click", () => loadData(true));
-    $("#clear").addEventListener("click", () => {
-      $("#search").value = ""; $("#region").value = "";
-      document.querySelectorAll(".ms input:checked").forEach(cb => cb.checked = false);
-      document.querySelectorAll(".ms").forEach(ms => updateMsLabel(ms, ms.querySelector(".ms-label").textContent.includes("categ")?"All categories":"All statuses"));
-      buildFilterOptions();
-      page = 1; applyFilters();
+  /* ---------- Edit modal ---------- */
+  function openModal(key){
+    const row=allRows.find(r=>String(r.Name)===String(key));
+    if(!row) return;
+    editingKey=key;
+    $("#modal-title").textContent="Edit · "+row.Name;
+    $("#modal-ctx").textContent=`${row.Category||""} · ${row.Region||""}`;
+    $("#m-status").value=normalizeStatus(row.Status);
+    $("#m-last").value=toDateInput(row["Last Contacted"]);
+    $("#m-next").value=row["Next Step"]||"";
+    $("#m-assigned").value=row["Assigned To"]||session.name;
+    $("#m-err").textContent="";
+    $("#modal-bg").classList.add("show");
+  }
+  function normalizeStatus(raw){
+    const s=(raw||"").toLowerCase().trim();
+    if(s.startsWith("contact")) return "Contacted";
+    if(s.startsWith("awaiting")) return "Awaiting reply";
+    if(s==="done"||s.startsWith("complete")) return "Done";
+    return "Not contacted";
+  }
+  function toDateInput(v){ const m=String(v||"").match(/^\d{4}-\d{2}-\d{2}/); return m?m[0]:""; }
+  function closeModal(){ $("#modal-bg").classList.remove("show"); editingKey=null; }
+
+  async function saveEdit(){
+    if(!editingKey) return;
+    const updates={ "Status":$("#m-status").value, "Last Contacted":$("#m-last").value, "Next Step":$("#m-next").value.trim(), "Assigned To":$("#m-assigned").value.trim() };
+    const btn=$("#m-save"); btn.setAttribute("aria-busy","true"); btn.textContent="Saving…"; $("#m-err").textContent="";
+    try{
+      const res=await apiPost({ mode:"update", code:session.code, name:session.name, key:editingKey, updates });
+      if(!res.ok) throw new Error(res.error||"Save failed");
+      // optimistic local update so it reflects instantly
+      const row=allRows.find(r=>String(r.Name)===String(editingKey));
+      if(row){ Object.assign(row,updates); row["Last Edited By"]=session.name; }
+      closeModal(); applyFilters(); renderStats(); renderChart(); toast("Saved ✓");
+    }catch(e){ $("#m-err").textContent=e.message; }
+    finally{ btn.setAttribute("aria-busy","false"); btn.textContent="Save"; }
+  }
+
+  function toast(msg,isErr){ const t=$("#toast"); t.textContent=msg; t.className=isErr?"err show":"show"; setTimeout(()=>t.classList.remove("show"),2200); }
+
+  /* ---------- Controls ---------- */
+  function initControls(){
+    $("#search").addEventListener("input",()=>{ page=1; applyFilters(); });
+    $("#region").addEventListener("change",()=>{ page=1; applyFilters(); });
+    $("#refresh").addEventListener("click",()=>loadData(true));
+    $("#signout").addEventListener("click",signOut);
+    $("#clear").addEventListener("click",()=>{
+      $("#search").value=""; $("#region").value="";
+      document.querySelectorAll(".ms input:checked").forEach(cb=>cb.checked=false);
+      buildFilterOptions(); page=1; applyFilters();
     });
-
-    // multiselect open/close
-    document.querySelectorAll(".ms").forEach(ms => {
-      ms.querySelector(".ms-toggle").addEventListener("click", (e) => {
-        e.stopPropagation();
-        document.querySelectorAll(".ms.open").forEach(o => { if (o !== ms) o.classList.remove("open"); });
-        ms.classList.toggle("open");
-      });
-    });
-    document.addEventListener("click", () => document.querySelectorAll(".ms.open").forEach(o => o.classList.remove("open")));
-  }
-
-  /* ---------- Password gate ---------- */
-  function initGate() {
-    if (!PASSWORD) { $("#app").hidden = false; start(); return; }
-    const gate = $("#gate"); gate.hidden = false;
-    const tryUnlock = () => {
-      if ($("#gate-input").value === PASSWORD) { gate.hidden = true; $("#app").hidden = false; start(); }
-      else { $("#gate-err").textContent = "Incorrect password."; }
-    };
-    $("#gate-btn").addEventListener("click", tryUnlock);
-    $("#gate-input").addEventListener("keydown", e => { if (e.key === "Enter") tryUnlock(); });
-    $("#gate-input").focus();
-  }
-
-  /* ---------- Boot ---------- */
-  function start() {
-    initControls();
-    loadData(false);
-    if (AUTO_REFRESH_MINUTES > 0) {
-      if (refreshTimer) clearInterval(refreshTimer);
-      refreshTimer = setInterval(() => loadData(false), AUTO_REFRESH_MINUTES * 60 * 1000);
-    }
+    document.querySelectorAll(".ms").forEach(ms=>ms.querySelector(".ms-toggle").addEventListener("click",e=>{ e.stopPropagation(); document.querySelectorAll(".ms.open").forEach(o=>{ if(o!==ms) o.classList.remove("open"); }); ms.classList.toggle("open"); }));
+    document.addEventListener("click",()=>document.querySelectorAll(".ms.open").forEach(o=>o.classList.remove("open")));
+    $("#m-cancel").addEventListener("click",closeModal);
+    $("#m-save").addEventListener("click",saveEdit);
+    $("#modal-bg").addEventListener("click",e=>{ if(e.target===$("#modal-bg")) closeModal(); });
+    document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
   }
 
   document.addEventListener("DOMContentLoaded", initGate);
